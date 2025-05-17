@@ -1,9 +1,33 @@
-@import './base.css';
+@import "./base.css";
+@import "tailwindcss";
+
+.font-daruma {
+  font-family: "Darumadrop One", cursive;
+}
+
+/* Add transition effects */
+.scale-hover {
+  transition: transform 0.2s ease;
+}
+
+.scale-hover:hover {
+  transform: scale(1.05);
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   font-weight: normal;
 }
 
@@ -21,15 +45,4 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-}
+/* Using Tailwind for responsive layout instead of custom media queries */
