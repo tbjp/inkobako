@@ -1,6 +1,6 @@
 <template>
   <div class="p-6">
-    <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-center justify-center h-screen">
       <router-link
         to="/"
         class="self-start mb-4 text-green-800 font-medium hover:text-green-600 transition-colors"
@@ -8,13 +8,15 @@
         &larr; Back
       </router-link>
 
-      <h1 class="font-daruma text-3xl mb-4 flex items-center gap-2 text-center text-neutral-800">
-        <span class="text-3xl">⏰</span>
-        Timer
-      </h1>
+      <div
+        class="font-daruma text-4xl mb-4 flex flex-col items-center text-center text-neutral-800"
+      >
+        <div class="text-6xl">⏰</div>
+        <h1>Timer</h1>
+      </div>
 
       <div
-        class="bg-red-500 rounded-[40px] w-full max-w-md sm:max-w-lg md:max-w-2xl p-6 md:p-10 flex flex-col items-center justify-center shadow-md"
+        class="bg-inko-rust w-full gap-4 shape max-w-md sm:max-w-lg md:max-w-2xl p-6 md:p-10 flex flex-col items-center justify-center"
       >
         <div class="text-5xl md:text-7xl text-white font-bold mb-6 md:mb-10">
           {{ displayTime }}
@@ -80,8 +82,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
-const minutes = ref(10);
-const seconds = ref(5);
+const minutes = ref(1);
+const seconds = ref(0);
 const isRunning = ref(false);
 let timerInterval = null;
 
@@ -114,8 +116,8 @@ const stopTimer = () => {
 
 const resetTimer = () => {
   stopTimer();
-  minutes.value = 10;
-  seconds.value = 5;
+  minutes.value = 1;
+  seconds.value = 0;
 };
 
 const incrementMinutes = () => {

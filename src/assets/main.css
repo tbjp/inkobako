@@ -1,5 +1,16 @@
 @import "./base.css";
+@import "./fancyBorder.css";
 @import "tailwindcss";
+
+@theme {
+  --color-inko-rust: #f4664c;
+  --color-inko-teal: #82d5bb;
+  --color-inko-lime: #85c987;
+  --color-inko-coral: #e29266;
+  --color-inko-purple: #b77ceb;
+  --color-inko-periwinkle: #879dee;
+  --color-inko-azure: #289dfe;
+}
 
 .font-daruma {
   font-family: "Darumadrop One", cursive;

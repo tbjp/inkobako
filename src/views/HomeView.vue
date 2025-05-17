@@ -9,10 +9,10 @@ const navigateToTimer = () => {
 </script>
 
 <template>
-  <main class="p-4 pt-6">
+  <main class="p-4 pt-6 flex flex-col items-center gap-4">
     <h1 class="font-daruma text-5xl text-blue-500 mb-8 text-center">インコばこ</h1>
 
-    <div class="bg-amber-50 rounded-3xl p-8 shadow-md max-w-md mx-auto">
+    <div class="bg-amber-50 rounded-3xl p-8 border-4 border-inko-coral max-w-md mx-auto">
       <div class="grid grid-cols-2 gap-8 p-2">
         <!-- Timer Card -->
         <div
