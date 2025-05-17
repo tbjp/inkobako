@@ -3,7 +3,7 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-b bg-lime-200 pb-8 w-full">
+  <div class="min-h-screen bg-gradient-to-b bg-green-100 pb-8 w-full">
     <RouterView />
   </div>
 </template>
