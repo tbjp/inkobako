@@ -17,7 +17,7 @@
       </div>
 
       <div
-        class="bg-transparent w-full h-full max-w-md sm:max-w-lg md:max-w-2xl p-6 md:p-10 flex flex-col items-center justify-between relative"
+        class="bg-transparent w-full h-full max-w-md sm:max-w-lg md:max-w-2xl py-10 md:p-10 flex flex-col items-center justify-between relative"
       >
         <!-- background with z-index and absolute position to be same size as parent -->
         <div
@@ -158,17 +158,17 @@
           </div>
         </div>
 
-        <!-- TEAM TIMER MODE -->
+        <!-- TEAM MODE -->
         <div
           v-else-if="selectedMode === 'team'"
-          class="w-[90%] text-gray-800 mb-2 md:mb-2 transition-transform"
+          class="w-full text-gray-800 mb-2 md:mb-2 transition-transform"
         >
-          <div v-for="team in teams" :key="team.id" class="flex flex-row mb-4">
-            <div class="p-2 bg-opacity-10 rounded-lg grow bg-white">
-              <div class="flex justify-between items-center mb-1">
+          <div v-for="team in teams" :key="team.id" class="flex flex-row mb-4 w-full">
+            <div class="p-2 bg-opacity-10 rounded-lg bg-white w-full">
+              <div class="flex justify-between items-center mb-1 w-full">
                 <input
                   v-model="team.name"
-                  class="bg-transparent text-gray-800 text-xl font-bold focus:outline-none"
+                  class="bg-transparent text-gray-800 text-xl font-bold px-1 py-2 focus:outline-black w-[10em]"
                   :disabled="isRunning"
                 />
                 <div class="flex items-center text-2xl md:text-4xl font-mono gap-1">
