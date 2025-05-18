@@ -3,10 +3,10 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="min-h-screen bg-green-100 pb-8 w-full flex flex-col">
+  <div class="min-h-screen bg-green-100 pb-8 w-full flex flex-col overflow-hidden">
     <router-view v-slot="{ Component, route }">
       <transition :name="route.meta.transition || 'home'">
-        <component :is="Component" class="absolute inset-0" />
+        <component :is="Component" class="absolute inset-0 z-5 overflow-hidden" />
       </transition>
     </router-view>
   </div>
