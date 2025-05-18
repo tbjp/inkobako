@@ -9,11 +9,13 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { transition: 'home' },
     },
     {
       path: '/timer',
       name: 'timer',
-      component: TimerView // Load the Timer tool view
+      component: TimerView, // Load the Timer tool view
+      meta: { transition: 'tool' },
     },
     {
       path: '/about',
@@ -22,6 +24,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
+      meta: { transition: 'tool' },
     },
   ],
 })
