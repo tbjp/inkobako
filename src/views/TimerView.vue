@@ -12,7 +12,7 @@
         class="font-daruma text-4xl mb-4 flex flex-col items-center text-center text-neutral-800"
       >
         <!-- Timer image from import -->
-        <img :src="timer" alt="Timer" class="w-16 h-16 mb-2" />
+        <img :src="timerImg" alt="Timer" class="w-16 h-16 mb-2" />
         <h1>Timer</h1>
       </div>
 
@@ -385,7 +385,7 @@
 
 <script setup>
 import { ref, onBeforeUnmount, reactive } from "vue";
-import timer from "../assets/timer.webp";
+import timerImg from "../assets/timer.webp";
 
 // Timer mode state
 const selectedMode = ref("countdown");

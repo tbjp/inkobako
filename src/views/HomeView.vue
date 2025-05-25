@@ -2,13 +2,13 @@
 import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import ToolboxLink from "@/components/ToolboxLink.vue";
-// import blueinko from "../assets/blueinko.webp";
-import brain from "../assets/brain.webp";
-import elephant from "../assets/elephant.webp";
-import lightning from "../assets/lightning.webp";
-import list from "../assets/list.webp";
-import timer from "../assets/timer.webp";
-import lottery from "../assets/lottery.webp";
+import blueinkoImg from "../assets/blueinko.webp";
+import brainImg from "../assets/brain.webp";
+import elephantImg from "../assets/elephant.webp";
+import lightningImg from "../assets/lightning.webp";
+import listImg from "../assets/list.webp";
+import timerImg from "../assets/timer.webp";
+import lotteryImg from "../assets/lottery.webp";
 
 const router = useRouter();
 const inkoHidden = ref(true); // Start hidden
@@ -61,7 +61,7 @@ const navigateToLottery = () => {
       class="bg-amber-50 rounded-3xl p-8 border-4 border-orange-100 max-w-md mx-auto grow relative"
     >
       <img
-        src="../assets/blueinko.webp"
+        :src="blueinkoImg"
         alt="Blue Inko"
         @mouseover="hideInko"
         :class="[
@@ -70,33 +70,33 @@ const navigateToLottery = () => {
         ]"
       />
       <div class="grid grid-cols-2 gap-8 p-2">
-        <ToolboxLink :imageUrl="timer" label="Timer" @click="navigateToTimer" />
+        <ToolboxLink :imageUrl="timerImg" label="Timer" @click="navigateToTimer" />
         <ToolboxLink
-          :imageUrl="brain"
+          :imageUrl="brainImg"
           label="Memory"
           @click="navigateToMemory"
           class="pointer-events-none"
         />
         <ToolboxLink
-          :imageUrl="elephant"
+          :imageUrl="elephantImg"
           label="Sleeping Elephants"
           @click="navigateToSleepingElephants"
           class="pointer-events-none"
         />
         <ToolboxLink
-          :imageUrl="lightning"
+          :imageUrl="lightningImg"
           label="Storm Speak"
           @click="navigateToStormSpeak"
           class="pointer-events-none"
         />
         <ToolboxLink
-          :imageUrl="list"
+          :imageUrl="listImg"
           label="Random List"
           @click="navigateToRandomList"
           class="pointer-events-none"
         />
         <ToolboxLink
-          :imageUrl="lottery"
+          :imageUrl="lotteryImg"
           label="Lottery"
           @click="navigateToLottery"
           class="pointer-events-none"
