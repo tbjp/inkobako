@@ -161,91 +161,98 @@
         <!-- TEAM MODE -->
         <div
           v-else-if="selectedMode === 'team'"
-          class="w-full text-gray-800 mb-2 md:mb-2 transition-transform max-h-[300px] overflow-auto"
+          class="text-gray-800 mb-2 md:mb-2 transition-transform max-h-[300px] overflow-auto"
         >
-          <div v-for="team in teams" :key="team.id" class="flex flex-row mb-4 w-full">
-            <div class="p-2 bg-opacity-10 rounded-lg bg-white w-full">
-              <div class="flex justify-between items-center mb-1 w-full">
-                <input
-                  v-model="team.name"
-                  class="bg-transparent text-gray-800 text-xl font-bold px-1 py-2 focus:outline-black w-[10em]"
-                  :disabled="isRunning"
-                />
-                <div class="flex items-center text-2xl md:text-4xl font-mono gap-1">
-                  <div class="flex flex-col items-center">
-                    <div class="countdown font-mono">
-                      <span
-                        :style="{ '--value': team.minutes }"
-                        aria-live="polite"
-                        aria-label="minutes"
-                      >
-                        {{ team.minutes.toString().padStart(2, "0") }}
-                      </span>
+          <div
+            :class="{
+              'grid grid-cols-2 gap-y-4 w-full': teams.length > 2,
+              'flex flex-col gap-y-4 w-full': teams.length <= 2,
+            }"
+          >
+            <div v-for="team in teams" :key="team.id" class="flex flex-row w-full">
+              <div class="p-2 bg-opacity-10 rounded-lg bg-white w-full">
+                <div class="flex justify-between items-center mb-1 w-full">
+                  <input
+                    v-model="team.name"
+                    class="bg-transparent text-gray-800 text-xl font-bold px-1 py-2 focus:outline-black w-full"
+                    :disabled="isRunning"
+                  />
+                  <div class="flex items-center text-2xl md:text-2xl font-mono gap-1">
+                    <div class="flex flex-col items-center">
+                      <div class="countdown font-mono">
+                        <span
+                          :style="{ '--value': team.minutes }"
+                          aria-live="polite"
+                          aria-label="minutes"
+                        >
+                          {{ team.minutes.toString().padStart(2, "0") }}
+                        </span>
+                      </div>
                     </div>
-                    <div class="text-xs mt-1 font-medium">Min</div>
-                  </div>
-                  <span class="pb-5">:</span>
-                  <div class="flex flex-col items-center">
-                    <div class="countdown font-mono">
-                      <span
-                        :style="{ '--value': team.seconds }"
-                        aria-live="polite"
-                        aria-label="seconds"
-                      >
-                        {{ team.seconds.toString().padStart(2, "0") }}
-                      </span>
+                    <span class="pb-1">:</span>
+                    <div class="flex flex-col items-center">
+                      <div class="countdown font-mono">
+                        <span
+                          :style="{ '--value': team.seconds }"
+                          aria-live="polite"
+                          aria-label="seconds"
+                        >
+                          {{ team.seconds.toString().padStart(2, "0") }}
+                        </span>
+                      </div>
                     </div>
-                    <div class="text-xs mt-1 font-medium">Sec</div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              class="flex justify-center items-center min-w-[100px] transition-all duration-300 ease-in-out"
-              :class="{
-                'scale-100 pointer-events-auto': isRunning,
-                'scale-0 pointer-events-none': !isRunning,
-              }"
-            >
-              <button
-                v-if="!team.isPaused"
-                @click="pauseTeamTimer(team.id)"
-                class="px-4 py-4 bg-white text-inko-rust rounded-full text-sm font-semibold"
+              <div
+                class="flex justify-center items-center min-w-[80px] transition-all duration-300 ease-in-out"
+                :class="{
+                  'scale-100 pointer-events-auto': isRunning,
+                  'scale-0 pointer-events-none': !isRunning,
+                }"
               >
-                <!-- Square white div -->
-                <div class="w-4 h-4 bg-inko-rust"></div>
-              </button>
-              <button
-                v-else-if="team.isPaused"
-                @click="resumeTeamTimer(team.id)"
-                class="px-4 py-4 bg-green-500 text-gray-800 rounded-full text-sm font-semibold"
-              >
-                Done!
-              </button>
+                <button
+                  v-if="!team.isPaused"
+                  @click="pauseTeamTimer(team.id)"
+                  class="px-4 py-4 bg-white text-inko-rust rounded-full text-sm font-semibold"
+                >
+                  <!-- Square white div -->
+                  <div class="w-4 h-4 bg-inko-rust"></div>
+                </button>
+                <button
+                  v-else-if="team.isPaused"
+                  @click="resumeTeamTimer(team.id)"
+                  class="px-4 py-4 bg-green-500 text-white rounded-full text-sm font-semibold"
+                >
+                  <div class="w-4 h-4 font-bold">✓</div>
+                </button>
+              </div>
             </div>
           </div>
-          <button
-            @click="addTeam"
-            class="btn btn-sm me-2 btn-circle btn-ghost bg-white text-inko-rust font-bold text-lg transition-all duration-300 ease-in-out"
-            :class="{
-              'scale-100 pointer-events-auto': !isRunning,
-              'scale-0 pointer-events-none': isRunning,
-            }"
-          >
-            +
-          </button>
-          <!-- Remove team button -->
-          <button
-            v-if="teams.length > 2"
-            @click="removeTeam"
-            class="btn btn-sm btn-circle btn-ghost bg-white text-inko-rust font-bold text-lg transition-all duration-300 ease-in-out"
-            :class="{
-              'scale-100 pointer-events-auto': !isRunning,
-              'scale-0 pointer-events-none': isRunning,
-            }"
-          >
-            -
-          </button>
+          <div class="pt-2">
+            <button
+              @click="addTeam"
+              class="btn btn-sm me-2 btn-circle btn-ghost bg-white text-inko-rust font-bold text-lg transition-all duration-300 ease-in-out"
+              :class="{
+                'scale-100 pointer-events-auto': !isRunning,
+                'scale-0 pointer-events-none': isRunning,
+              }"
+            >
+              +
+            </button>
+            <!-- Remove team button -->
+            <button
+              v-if="teams.length > 2"
+              @click="removeTeam"
+              class="btn btn-sm btn-circle btn-ghost bg-white text-inko-rust font-bold text-lg transition-all duration-300 ease-in-out"
+              :class="{
+                'scale-100 pointer-events-auto': !isRunning,
+                'scale-0 pointer-events-none': isRunning,
+              }"
+            >
+              -
+            </button>
+          </div>
         </div>
 
         <!-- User Input sections for each mode -->
