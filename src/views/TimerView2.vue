@@ -33,7 +33,7 @@
           >
             <option value="countdown">Countdown</option>
             <option value="stopwatch">Stopwatch</option>
-            <option value="random">Random</option>
+            <!-- <option value="random">Random</option> -->
             <option value="team">Team</option>
           </select>
         </div>
@@ -276,7 +276,7 @@
               </div>
               <input
                 type="text"
-                class="text-2xl md:text-4xl font-bold text-center w-full bg-transparent border-none focus:outline-none"
+                class="text-2xl md:text-4xl font-bold text-center text-gray-900 w-full bg-transparent border-none focus:outline-none"
                 v-model="minutesInput"
                 maxlength="2"
                 @blur="updateMinutes"
@@ -300,7 +300,7 @@
               </div>
               <input
                 type="text"
-                class="text-2xl md:text-4xl font-bold text-center w-full bg-transparent border-none focus:outline-none"
+                class="text-2xl md:text-4xl font-bold text-center text-gray-900 w-full bg-transparent border-none focus:outline-none"
                 v-model="secondsInput"
                 maxlength="2"
                 @blur="updateSeconds"
@@ -374,14 +374,14 @@
         <div class="flex gap-4 w-full justify-center mt-2">
           <button
             @click="handleStartStop()"
-            class="w-24 py-3 bg-white rounded-full font-medium hover:bg-gray-100 transition-colors shadow-sm"
+            class="w-24 py-3 bg-white rounded-full text-black font-medium hover:bg-gray-100 transition-colors shadow-sm"
           >
             {{ isRunning ? "Stop" : "Start" }}
           </button>
           <button
             v-if="!isRunning"
             @click="handleReset()"
-            class="w-24 py-3 bg-white rounded-full font-medium hover:bg-gray-100 transition-colors shadow-sm"
+            class="w-24 py-3 bg-white rounded-full text-black font-medium hover:bg-gray-100 transition-colors shadow-sm"
           >
             Reset
           </button>
@@ -394,6 +394,7 @@
 <script setup>
 import { ref, onBeforeUnmount, reactive } from "vue";
 import timerImg from "../assets/timer.webp";
+import sound from "../assets/sound.mp3";
 
 // Timer mode state
 const selectedMode = ref("countdown");
@@ -512,6 +513,7 @@ const startCountdownTimer = () => {
         minutes.value--;
         seconds.value = 59;
       } else {
+        playSound();
         clearInterval(timerInterval);
         isRunning.value = false;
       }
@@ -534,9 +536,6 @@ const startStopwatchTimer = () => {
 
     // Continue from current values instead of resetting
     timerInterval = setInterval(() => {
-      console.log(
-        `Updating stopwatch: ${stopwatchHours.value}:${stopwatchMinutes.value}:${stopwatchSeconds.value}`,
-      );
       stopwatchSeconds.value++;
       if (stopwatchSeconds.value === 60) {
         stopwatchSeconds.value = 0;
@@ -759,6 +758,13 @@ resetCountdownTimer();
 onBeforeUnmount(() => {
   clearInterval(timerInterval);
 });
+
+// Function to play a sound to be called when timers end
+const playSound = () => {
+  console.log("Playing sound");
+  const audio = new Audio(sound);
+  audio.play();
+};
 </script>
 <!-- **Summary of Changes:**
 
